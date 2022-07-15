@@ -13,11 +13,19 @@ use Symfony\Component\HttpFoundation\Response;
 class MoviesController extends AbstractController
 {
 
-    #[Route('/movies', name: 'app_movies')]
-    public function index(): Response
+    private $em;
+    public function __construct( MovieRepository $movieRepository)
     {
-        return $this->render('movies/index.html.twig');
+        $this->movieRepository = $movieRepository;
     }
 
+    #[Route('/movies', name: 'movies')]
+    public function index(): Response
+    {
+        $movies = $this->movieRepository->findAll();
 
+        return $this->render('movies/index.html.twig', [
+            'movies' => $movies
+        ]);
+    }
 }
