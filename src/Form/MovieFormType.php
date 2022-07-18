@@ -21,14 +21,17 @@ class MovieFormType extends AbstractType
                     'class' => 'bg-transparent block border-b-2 w-full h-20 text-6xl outline-none',
                     'placeholder' => 'Film címe....'
                 ),
-                'label' => false
+                'label' => false,
+                'required' => false
             ])
             ->add('releaseYear', IntegerType::class , [
                 'attr' => array(
                     'class' => 'bg-transparent block mt-10 border-b-2 w-full h-20 text-6xl outline-none',
                     'placeholder' => 'Kiadási év.....'
                 ),
-                'label' => false
+                'label' => false,
+                'required' => false
+
             ])
 
             ->add('description', TextareaType::class , [
@@ -36,11 +39,14 @@ class MovieFormType extends AbstractType
                     'class' => 'bg-transparent block mt-10 border-b-2 w-full h-60 text-6xl outline-none',
                     'placeholder' => 'Leírása....'
                 ),
-                'label' => false
+                'label' => false,
+                'required' => false
+
             ])
             ->add('imagePath', FileType::class , array(
                 'required' => false,
-                'mapped' => false
+                'mapped' => false,
+
             ))
 /*            ->add('actors')*/
         ;
