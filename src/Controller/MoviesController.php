@@ -67,6 +67,16 @@ class MoviesController extends AbstractController
         ]);
     }
 
+
+    #[Route('/movies/delete/{id}' , name:'delete_movie' , methods: ['GET','DELETE'])]
+    public function delete ($id):Response{
+        $movie = $this->movieRepository->find($id);
+        $this->em->remove($movie);
+        return $this->redirectToRoute('movies');
+    }
+
+
+
     #[Route('/movies/edit/{id}', name:'edit_movie')]
     public function edit($id , Request $request ):Response
     {
@@ -104,14 +114,12 @@ class MoviesController extends AbstractController
                 $movie->setTitle($form->get('title')->getData());
                 $movie->setReleaseYear($form->get('releaseYear')->getData());
                 $movie->setDescription($form->get('description')->getData());
-
                 $this->em->flush();
                 return $this->redirectToRoute('movies');
             }
         }
-
         return $this->render('movies/edit.html.twig' , [
-           'movie' => $movie,
+            'movie' => $movie,
             'form' => $form->createView()
         ]);
     }
